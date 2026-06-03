@@ -1,7 +1,5 @@
-package com.senai.carteirinha_will
+package com.senai.carteirinha_will.carteirinha.presentation.component
 
-import android.R
-import androidx.annotation.Size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

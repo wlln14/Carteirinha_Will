@@ -1,4 +1,4 @@
-package com.senai.carteirinha_will
+package com.senai.carteirinha_will.carteirinha.presentation.component
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

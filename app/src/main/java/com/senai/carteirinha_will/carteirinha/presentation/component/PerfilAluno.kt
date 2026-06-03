@@ -1,4 +1,4 @@
-package com.senai.carteirinha_will
+package com.senai.carteirinha_will.carteirinha.presentation.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.senai.carteirinha_will.R
 
 @Composable
 fun PerfilAluno(
