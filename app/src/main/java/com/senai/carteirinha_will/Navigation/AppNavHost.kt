@@ -1,6 +1,5 @@
 package com.senai.carteirinha_will.Navigation
 
-import LoginScreen
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -10,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.senai.carteirinha_will.HomeScreen
+import com.senai.carteirinha_will.Screens.LoginScreen
 import com.senai.carteirinha_will.carteirinha.presentation.screen.CarteirinhaScreen
 import com.senai.carteirinha_will.unidadecurriculares.presentation.screen.UnidadeCurricularScreen
 
