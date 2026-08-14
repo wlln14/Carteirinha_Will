@@ -9,8 +9,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.senai.carteirinha_will.HomeScreen
-import com.senai.carteirinha_will.Screens.LoginScreen
+import com.senai.carteirinha_will.LoginScreen
 import com.senai.carteirinha_will.carteirinha.presentation.screen.CarteirinhaScreen
+import com.senai.carteirinha_will.unidadecurriculares.Domain.model.UnidadeCurricular
 import com.senai.carteirinha_will.unidadecurriculares.presentation.screen.UnidadeCurricularScreen
 
 @Composable
@@ -28,10 +29,13 @@ fun AppNavHost(
             )
         }
 
-        composable(route = Routes.Home.route) {
-            HomeScreen(
-                navController = navController
-            )
+        composable(route = Routes.Home_Aluno.route) {
+            Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                HomeScreen(
+                    modifier = Modifier.padding(innerPadding),
+                    navController = navController
+                )
+            }
         }
 
         composable(route = Routes.Carteirinha.route) {
@@ -44,8 +48,12 @@ fun AppNavHost(
             }
         }
 
-        composable(route = Routes.UnidadeCurricular.route) {
-            UnidadeCurricularScreen()
+        composable(route = Routes.UnidadeCurricularAluno.route) {
+            Scaffold(modifier = Modifier.fillMaxSize()) {innerPadding ->
+                UnidadeCurricularScreen(
+                    modifier = Modifier.padding(innerPadding)
+                )
+            }
         }
     }
 }

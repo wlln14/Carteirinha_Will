@@ -1,4 +1,4 @@
-package com.senai.carteirinha_will.Screens
+package com.senai.carteirinha_will
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -27,8 +27,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.senai.carteirinha_will.Navigation.Routes
 import com.senai.carteirinha_will.R
 
@@ -119,7 +121,7 @@ fun LoginScreen(navController: NavController) {
         // Botão
         Button(
             onClick = {
-                navController.navigate(Routes.Home.route) {
+                navController.navigate(Routes.Home_Aluno.route) {
                     popUpTo(Routes.Login.route) {
                         inclusive = true
                     }
@@ -157,4 +159,10 @@ fun LoginScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(25.dp))
     }
+}
+
+@Composable
+@Preview(showSystemUi = true)
+fun LoginScreenPreview(){
+    LoginScreen(navController = rememberNavController())
 }
