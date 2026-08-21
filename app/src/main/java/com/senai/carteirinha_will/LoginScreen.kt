@@ -121,7 +121,7 @@ fun LoginScreen(navController: NavController) {
         // Botão
         Button(
             onClick = {
-                navController.navigate(Routes.Home_Aluno.route) {
+                navController.navigate(Routes.Home_Professor.route) {
                     popUpTo(Routes.Login.route) {
                         inclusive = true
                     }

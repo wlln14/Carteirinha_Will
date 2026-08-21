@@ -8,10 +8,15 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.senai.carteirinha_will.HomeProfessor
 import com.senai.carteirinha_will.HomeScreen
 import com.senai.carteirinha_will.LoginScreen
+import com.senai.carteirinha_will.TurmasProfessorScreen
+import com.senai.carteirinha_will.UnidadeCurricularProfessorScreen
 import com.senai.carteirinha_will.carteirinha.presentation.screen.CarteirinhaScreen
+import com.senai.carteirinha_will.unidadecurriculares.Domain.model.TurmasProfessor
 import com.senai.carteirinha_will.unidadecurriculares.Domain.model.UnidadeCurricular
+import com.senai.carteirinha_will.unidadecurriculares.Domain.model.UnidadeCurricularProfessor
 import com.senai.carteirinha_will.unidadecurriculares.presentation.screen.UnidadeCurricularScreen
 
 @Composable
@@ -38,6 +43,15 @@ fun AppNavHost(
             }
         }
 
+        composable(route = Routes.Home_Professor.route) {
+            Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                HomeProfessor(
+                    modifier = Modifier.padding(innerPadding),
+                    navController = navController
+                )
+            }
+        }
+
         composable(route = Routes.Carteirinha.route) {
             Scaffold(
                 modifier = Modifier.fillMaxSize()
@@ -48,9 +62,27 @@ fun AppNavHost(
             }
         }
 
+        composable(route = Routes.TurmasProfessor.route) {
+            Scaffold(
+                modifier = Modifier.fillMaxSize()
+            ) { innerPadding ->
+                TurmasProfessorScreen(
+                    modifier = Modifier.padding(innerPadding)
+                )
+            }
+        }
+
         composable(route = Routes.UnidadeCurricularAluno.route) {
             Scaffold(modifier = Modifier.fillMaxSize()) {innerPadding ->
                 UnidadeCurricularScreen(
+                    modifier = Modifier.padding(innerPadding)
+                )
+            }
+        }
+
+        composable(route = Routes.UnidadeCurricularProfessor.route) {
+            Scaffold(modifier = Modifier.fillMaxSize()) {innerPadding ->
+                UnidadeCurricularProfessorScreen(
                     modifier = Modifier.padding(innerPadding)
                 )
             }
