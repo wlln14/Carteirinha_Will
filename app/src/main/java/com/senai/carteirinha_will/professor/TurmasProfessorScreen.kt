@@ -1,4 +1,4 @@
-package com.senai.carteirinha_will
+package com.senai.carteirinha_will.professor
 
 import com.senai.carteirinha_will.unidadecurriculares.data.dataSourceTurmasProfessor
 
@@ -18,6 +18,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -60,7 +61,14 @@ fun TurmasProfessorScreen(
 
                 Card(
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .shadow(
+                            elevation = 15.dp,
+                            shape = RoundedCornerShape(8.dp),
+                            clip = false,
+                            ambientColor = Color(0xFFFF643C),
+                            spotColor = Color(0xFFFF643C)
+                        ),
 
                     shape = RoundedCornerShape(16.dp),
 
@@ -69,8 +77,8 @@ fun TurmasProfessorScreen(
                     ),
 
                     elevation = CardDefaults.cardElevation(
-                        defaultElevation = 5.dp
-                    )
+                        defaultElevation = 4.dp,
+                    ),
                 ) {
 
                     Column(

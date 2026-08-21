@@ -8,15 +8,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.senai.carteirinha_will.HomeProfessor
+import com.senai.carteirinha_will.professor.HomeProfessor
 import com.senai.carteirinha_will.HomeScreen
 import com.senai.carteirinha_will.LoginScreen
-import com.senai.carteirinha_will.TurmasProfessorScreen
-import com.senai.carteirinha_will.UnidadeCurricularProfessorScreen
+import com.senai.carteirinha_will.professor.TurmasProfessorScreen
+import com.senai.carteirinha_will.professor.UnidadeCurricularProfessorScreen
 import com.senai.carteirinha_will.carteirinha.presentation.screen.CarteirinhaScreen
-import com.senai.carteirinha_will.unidadecurriculares.Domain.model.TurmasProfessor
-import com.senai.carteirinha_will.unidadecurriculares.Domain.model.UnidadeCurricular
-import com.senai.carteirinha_will.unidadecurriculares.Domain.model.UnidadeCurricularProfessor
 import com.senai.carteirinha_will.unidadecurriculares.presentation.screen.UnidadeCurricularScreen
 
 @Composable
