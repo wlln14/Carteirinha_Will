@@ -1,4 +1,4 @@
-package com.senai.carteirinha_will
+package com.senai.carteirinha_will.feature.Login.presentation.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -29,23 +29,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.senai.carteirinha_will.Navigation.Routes
 import com.senai.carteirinha_will.R
+import com.senai.carteirinha_will.feature.Login.presentation.LoginEvent
+import com.senai.carteirinha_will.feature.Login.presentation.LoginViewModel
 
 @Composable
-fun LoginScreen(navController: NavController) {
-
-    // Guarda o texto digitado no campo Login
-    var login by remember {
-        mutableStateOf("")
-    }
-
-    // Guarda o texto digitado no campo Senha
-    var senha by remember {
-        mutableStateOf("")
-    }
+fun LoginScreen(navController: NavController,
+                modifier: Modifier = Modifier,
+                viewModel: LoginViewModel = viewModel()
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Column(
         modifier = Modifier
@@ -59,11 +57,10 @@ fun LoginScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.weight(1f))
 
-        // Campo Login
         OutlinedTextField(
-            value = login,
-            onValueChange = {
-                login = it
+            value = uiState.usuario,
+            onValueChange = { value ->
+                viewModel.onEvent(LoginEvent.OnUsuarioChange(value))
             },
             placeholder = {
                 Text(
@@ -83,7 +80,6 @@ fun LoginScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(35.dp))
 
-        // Linha vermelha
         Box(
             modifier = Modifier
                 .width(120.dp)
@@ -93,11 +89,10 @@ fun LoginScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(35.dp))
 
-        // Campo Senha
         OutlinedTextField(
-            value = senha,
-            onValueChange = {
-                senha = it
+            value = uiState.usuario,
+            onValueChange = { value ->
+                viewModel.onEvent(LoginEvent.OnSenhaChange(value))
             },
             placeholder = {
                 Text(
@@ -118,14 +113,9 @@ fun LoginScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(35.dp))
 
-        // Botão
         Button(
             onClick = {
-                navController.navigate(Routes.Home_Professor.route) {
-                    popUpTo(Routes.Login.route) {
-                        inclusive = true
-                    }
-                }
+                viewModel.onEvent(LoginEvent.OnEntrarClick)
             },
 
             shape = RoundedCornerShape(50.dp),
@@ -150,7 +140,6 @@ fun LoginScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.weight(1f))
 
-        // Logo
         Image(
             painter = painterResource(id = R.drawable.logo_senai),
             contentDescription = "Logo SENAI",

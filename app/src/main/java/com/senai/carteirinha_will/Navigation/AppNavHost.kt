@@ -9,8 +9,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.senai.carteirinha_will.professor.HomeProfessor
-import com.senai.carteirinha_will.HomeScreen
-import com.senai.carteirinha_will.LoginScreen
+import com.senai.carteirinha_will.feature.Home.presentation.screen.HomeScreen
+import com.senai.carteirinha_will.feature.Login.presentation.screen.LoginScreen
 import com.senai.carteirinha_will.professor.TurmasProfessorScreen
 import com.senai.carteirinha_will.professor.UnidadeCurricularProfessorScreen
 import com.senai.carteirinha_will.carteirinha.presentation.screen.CarteirinhaScreen

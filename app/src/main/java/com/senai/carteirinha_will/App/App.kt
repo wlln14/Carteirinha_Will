@@ -1,4 +1,4 @@
-package com.senai.carteirinha_will
+package com.senai.carteirinha_will.App
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
