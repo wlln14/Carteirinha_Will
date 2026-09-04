@@ -70,7 +70,7 @@ class LoginViewModel(
             }
             val result = repository.login(
                 state.usuario.trim(),
-                state.usuario.trim()
+                state.senha.trim()
             )
 
             result

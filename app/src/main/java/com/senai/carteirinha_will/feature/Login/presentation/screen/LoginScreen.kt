@@ -7,16 +7,20 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -35,15 +40,25 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.senai.carteirinha_will.Navigation.Routes
 import com.senai.carteirinha_will.R
+import com.senai.carteirinha_will.feature.Login.domain.model.UsuarioLogado
 import com.senai.carteirinha_will.feature.Login.presentation.LoginEvent
 import com.senai.carteirinha_will.feature.Login.presentation.LoginViewModel
 
 @Composable
 fun LoginScreen(navController: NavController,
                 modifier: Modifier = Modifier,
-                viewModel: LoginViewModel = viewModel()
+                viewModel: LoginViewModel = viewModel(),
+                onLoginSucesso: (UsuarioLogado) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(uiState.usuarioLogado) {
+        uiState.usuarioLogado?.let {
+            usuario ->
+            viewModel.onEvent(LoginEvent.OnNavegacaoRealizada)
+            onLoginSucesso(usuario)
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -75,7 +90,8 @@ fun LoginScreen(navController: NavController,
                 unfocusedBorderColor = Color(0xFF2145B5),
                 focusedContainerColor = Color.White,
                 unfocusedContainerColor = Color.White
-            )
+            ),
+            isError = uiState.erroMensage != null
         )
 
         Spacer(modifier = Modifier.height(35.dp))
@@ -90,7 +106,7 @@ fun LoginScreen(navController: NavController,
         Spacer(modifier = Modifier.height(35.dp))
 
         OutlinedTextField(
-            value = uiState.usuario,
+            value = uiState.senha,
             onValueChange = { value ->
                 viewModel.onEvent(LoginEvent.OnSenhaChange(value))
             },
@@ -108,8 +124,19 @@ fun LoginScreen(navController: NavController,
                 unfocusedBorderColor = Color(0xFF2145B5),
                 focusedContainerColor = Color.White,
                 unfocusedContainerColor = Color.White
-            )
+            ),
+            isError = uiState.erroMensage != null
         )
+
+        uiState.erroMensage?.let { error ->
+            Text(
+                text = "Usuário ou senha inválidos",
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier.fillMaxWidth(0.85f)
+                    .padding(0.dp, 25.dp, 0.dp, 0.dp)
+            )
+        }
 
         Spacer(modifier = Modifier.height(35.dp))
 
@@ -130,12 +157,21 @@ fun LoginScreen(navController: NavController,
 
         ) {
 
-            Text(
-                text = "ENTRAR",
-                color = Color(0xFF2145B5),
-                fontWeight = FontWeight.Bold
-            )
-
+            if (uiState.isLoading) {
+                LinearProgressIndicator(
+                    modifier = Modifier
+                        .fillMaxWidth(0.60f)
+                        .height(5.dp),
+                        color = Color.White,
+                        trackColor = Color(0xFFFF643C)
+                )
+            } else {
+                Text(
+                    text = "ENTRAR",
+                    color = Color(0xFF2145B5),
+                    fontWeight = FontWeight.Bold
+                )
+            }
         }
 
         Spacer(modifier = Modifier.weight(1f))
@@ -150,8 +186,8 @@ fun LoginScreen(navController: NavController,
     }
 }
 
-@Composable
-@Preview(showSystemUi = true)
-fun LoginScreenPreview(){
-    LoginScreen(navController = rememberNavController())
-}
+//@Composable
+//@Preview(showSystemUi = true)
+//fun LoginScreenPreview(){
+//    LoginScreen(navController = rememberNavController())
+//}
