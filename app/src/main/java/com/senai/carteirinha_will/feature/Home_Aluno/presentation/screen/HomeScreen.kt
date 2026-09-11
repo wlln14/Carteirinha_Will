@@ -1,4 +1,4 @@
-package com.senai.carteirinha_will.professor
+package com.senai.carteirinha_will.feature.Home_Aluno.presentation.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -23,8 +23,9 @@ import com.senai.carteirinha_will.feature.Home_Aluno.component.BotaoNavegacao
 import com.senai.carteirinha_will.App.Navigation.Routes
 import com.senai.carteirinha_will.R
 
+
 @Composable
-fun HomeProfessor(
+fun HomeScreen(
     navController: NavController,
     modifier: Modifier
 ) {
@@ -41,7 +42,7 @@ fun HomeProfessor(
         Spacer(modifier = Modifier.height(50.dp))
 
         Text(
-            text = "Olá Professor!",
+            text = "Olá aluno!",
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
             color = Color(0xFF2145B5)
@@ -53,7 +54,7 @@ fun HomeProfessor(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Prof. Willian Gama",
+                text = "Willian Gama",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Gray
@@ -71,7 +72,7 @@ fun HomeProfessor(
 
 
             Text(
-                text = "SENAI Anchieta",
+                text = "Desenvolvimento de sistemas",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Gray
@@ -87,14 +88,14 @@ fun HomeProfessor(
 
         Spacer(modifier = Modifier.height(80.dp))
 
-        BotaoNavegacao("Minhas Turmas", onClick = {
-            navController.navigate(Routes.TurmasProfessor.route)
+        BotaoNavegacao("Carteirinha", onClick = {
+            navController.navigate(Routes.Carteirinha.route)
         })
 
         Spacer(modifier = Modifier.height(35.dp))
 
         BotaoNavegacao("UCs", onClick = {
-            navController.navigate(Routes.UnidadeCurricularProfessor.route)
+            navController.navigate(Routes.UnidadeCurricularAluno.route)
         })
 
         Spacer(modifier = Modifier.weight(1f))

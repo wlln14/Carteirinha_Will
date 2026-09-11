@@ -1,6 +1,6 @@
 package com.senai.carteirinha_will.professor
 
-import com.senai.carteirinha_will.unidadecurriculares.data.dataSourceTurmasProfessor
+import com.senai.carteirinha_will.feature.unidadecurriculares.data.dataSourceTurmasProfessor
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
