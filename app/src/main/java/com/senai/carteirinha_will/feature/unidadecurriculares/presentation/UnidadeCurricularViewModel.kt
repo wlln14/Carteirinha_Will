@@ -2,9 +2,11 @@ package com.senai.carteirinha_will.feature.unidadecurriculares.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.senai.carteirinha_will.feature.unidadecurriculares.Domain.repository.UnidadeCurricularRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class UnidadeCurricularViewModel(
@@ -12,16 +14,32 @@ class UnidadeCurricularViewModel(
 ): ViewModel() {
     private val _uiState = MutableStateFlow(UnidadeCurricularUiState())
     val uiState: StateFlow<UnidadeCurricularUiState> = _uiState.asStateFlow()
-
-    fun carregar() {
+    fun carregar(){
         viewModelScope.launch {
-            _uiState.uptade{
+            _uiState.update {
                 it.copy(
-                    isLoading = false,
-                    listaUnidadesCurriculares = listaUnidadesCurriculares,
+                    isLoading = true,
                     errorMessage = null
                 )
             }
+            repository.listarUnidadesCurriculares()
+                .onSuccess { listaUnidadesCurriculares ->
+                    _uiState.update {
+                        it.copy(
+                            isLoading = false,
+                            listaUnidadesCurriculares = listaUnidadesCurriculares,
+                            errorMessage = null
+                        )
+                    }
+                }
+                .onFailure { throwable ->
+                    _uiState.update {
+                        it.copy(
+                            isLoading = false,
+                            errorMessage = throwable.message ?: "Erro ao carregar unidades curriculares."
+                        )
+                    }
+                }
         }
     }
 }

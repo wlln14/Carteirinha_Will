@@ -9,8 +9,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val carteirinhaApplication = application as CarteirinhaApplication
         setContent {
-            App()
+            App(container = carteirinhaApplication.container)
         }
     }
 }
