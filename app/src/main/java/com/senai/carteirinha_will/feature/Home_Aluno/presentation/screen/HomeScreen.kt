@@ -11,6 +11,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,6 +37,7 @@ fun HomeScreen(
     onToggleDarkTheme: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val colors = MaterialTheme.colorScheme
     val backgroundColor = if (isDarkTheme) Color(0xFF12151C) else Color(0xFFF5F6F8)
     val cardColor = if (isDarkTheme) Color(0xFF202633) else Color.White
     val primaryTextColor = if (isDarkTheme) Color(0xFFF1F3F8) else Color(0xFF292929)
@@ -51,7 +53,7 @@ fun HomeScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(AzulSenai, RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp))
+                .background(colors.primary, RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp))
                 .padding(horizontal = 24.dp, vertical = 22.dp)
         ) {
             Row(
