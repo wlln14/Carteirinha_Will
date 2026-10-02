@@ -119,7 +119,10 @@ fun LoginScreen(
                         focusedLabelColor = colors.primary,
                         cursorColor = colors.primary,
                         focusedContainerColor = colors.surface,
-                        unfocusedContainerColor = colors.surface
+                        unfocusedContainerColor = colors.surface,
+                        focusedTextColor = colors.onSurface,
+                        unfocusedTextColor = colors.onSurface,
+                        unfocusedLabelColor = colors.onSurfaceVariant
                     ),
                     isError = uiState.erroMensage != null
                 )
@@ -137,12 +140,15 @@ fun LoginScreen(
                     visualTransformation = PasswordVisualTransformation(),
                     shape = RoundedCornerShape(10.dp),
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = AzulSenai,
-                        unfocusedBorderColor = Color(0xFFD5D9E2),
-                        focusedLabelColor = AzulSenai,
-                        cursorColor = AzulSenai,
-                        focusedContainerColor = Color.White,
-                        unfocusedContainerColor = Color.White
+                        focusedBorderColor = colors.primary,
+                        unfocusedBorderColor = colors.outline,
+                        focusedLabelColor = colors.primary,
+                        cursorColor = colors.primary,
+                        focusedContainerColor = colors.surface,
+                        unfocusedContainerColor = colors.surface,
+                        focusedTextColor = colors.onSurface,
+                        unfocusedTextColor = colors.onSurface,
+                        unfocusedLabelColor = colors.onSurfaceVariant
                     ),
                     isError = uiState.erroMensage != null
                 )
