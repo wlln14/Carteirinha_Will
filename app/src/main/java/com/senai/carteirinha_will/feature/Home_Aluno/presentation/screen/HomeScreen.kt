@@ -21,6 +21,7 @@ import androidx.navigation.NavController
 import com.senai.carteirinha_will.App.Navigation.Routes
 import com.senai.carteirinha_will.R
 import com.senai.carteirinha_will.feature.Home_Aluno.component.BotaoNavegacao
+import com.senai.carteirinha_will.feature.Login.domain.model.UsuarioLogado
 
 private val AzulSenai = Color(0xFF2145B5)
 private val LaranjaSenai = Color(0xFFFF643C)
@@ -28,6 +29,7 @@ private val LaranjaSenai = Color(0xFFFF643C)
 @Composable
 fun HomeScreen(
     navController: NavController,
+    usuario: UsuarioLogado,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -51,7 +53,7 @@ fun HomeScreen(
             )
             Spacer(modifier = Modifier.height(9.dp))
             Text(
-                text = "Olá, Willian!",
+                text = "Olá, ${usuario.nome.substringBefore(" ").ifBlank { "Aluno" }}!",
                 color = Color.White,
                 fontSize = 26.sp,
                 fontWeight = FontWeight.Bold
@@ -93,22 +95,29 @@ fun HomeScreen(
                     Box(
                         modifier = Modifier
                             .width(4.dp)
-                            .height(58.dp)
+                            .height(76.dp)
                             .background(LaranjaSenai, RoundedCornerShape(4.dp))
                     )
                     Spacer(modifier = Modifier.width(14.dp))
-                    Column {
+                    Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "Willian Gama",
+                            text = usuario.nome.ifBlank { "Nome não informado" },
                             color = Color(0xFF252525),
                             fontSize = 17.sp,
                             fontWeight = FontWeight.SemiBold
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = "Desenvolvimento de Sistemas",
+                            text = usuario.curso.ifBlank { "Curso não informado" },
                             color = Color(0xFF666666),
                             fontSize = 13.sp
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = "Turma: ${usuario.turma.ifBlank { "Não informada" }}",
+                            color = AzulSenai,
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Medium
                         )
                     }
                 }
@@ -143,7 +152,6 @@ fun HomeScreen(
                     .align(Alignment.CenterHorizontally)
                     .width(130.dp)
                     .padding(bottom = 22.dp)
-
             )
         }
     }
