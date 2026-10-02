@@ -15,9 +15,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.senai.carteirinha_will.App.di.AppContainer
 import com.senai.carteirinha_will.App.session.SessionViewModel
+import com.senai.carteirinha_will.feature.Carteirinha.Presentation.screen.CarteirinhaScreen
 import com.senai.carteirinha_will.feature.Home_Aluno.presentation.screen.HomeScreen
 import com.senai.carteirinha_will.feature.Login.presentation.screen.LoginScreen
-import com.senai.carteirinha_will.feature.Carteirinha.Presentation.screen.CarteirinhaScreen
 import com.senai.carteirinha_will.feature.unidadecurriculares.presentation.UnidadeCurricularViewModel
 import com.senai.carteirinha_will.feature.unidadecurriculares.presentation.factory.UnidadeCurricularViewModelFactory
 import com.senai.carteirinha_will.feature.unidadecurriculares.presentation.screen.UnidadeCurricularScreen
@@ -35,7 +35,6 @@ fun AppNavHost(
         navController = navController,
         startDestination = Routes.Login.route
     ) {
-
         composable(route = Routes.Login.route) {
             LoginScreen(
                 navController = navController,
@@ -48,58 +47,36 @@ fun AppNavHost(
         }
 
         composable(route = Routes.Home_Aluno.route) {
-            val usuario = usuarioLogado
+            val usuarioAtual = usuarioLogado
 
-            if (usuario == null) {
+            if (usuarioAtual == null) {
                 LaunchedEffect(Unit) {
                     navController.navigate(Routes.Login.route)
                 }
             } else {
-
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     HomeScreen(
                         modifier = Modifier.padding(innerPadding),
-                        navController = navController
+                        navController = navController,
+                        usuario = usuarioAtual
                     )
                 }
             }
         }
 
-//        composable(route = Routes.Home_Professor.route) {
-//            Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//                HomeProfessor(
-//                    modifier = Modifier.padding(innerPadding),
-//                    navController = navController
-//                )
-//            }
-//        }
-
         composable(route = Routes.Carteirinha.route) {
-            Scaffold(
-                modifier = Modifier.fillMaxSize()
-            ) { innerPadding ->
+            Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                 CarteirinhaScreen(
                     modifier = Modifier.padding(innerPadding)
                 )
             }
         }
 
-//        composable(route = Routes.TurmasProfessor.route) {
-//            Scaffold(
-//                modifier = Modifier.fillMaxSize()
-//            ) { innerPadding ->
-//                TurmasProfessorScreen(
-//                    modifier = Modifier.padding(innerPadding)
-//                )
-//            }
-//        }
-
         composable(route = Routes.UnidadeCurricularAluno.route) {
             if (usuario == null) {
                 LaunchedEffect(Unit) {
                     navController.navigate(Routes.Login.route)
                 }
-
             } else {
                 val unidadeCurricularFactory = remember(
                     container.unidadeCurricularRepository
@@ -112,10 +89,7 @@ fun AppNavHost(
                 val unidadeCurricularViewModel: UnidadeCurricularViewModel = viewModel(
                     factory = unidadeCurricularFactory
                 )
-                Scaffold(
-                    modifier = Modifier.fillMaxSize()
-                ) { innerPadding ->
-
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     UnidadeCurricularScreen(
                         modifier = Modifier.padding(innerPadding),
                         viewModel = unidadeCurricularViewModel
@@ -123,13 +97,5 @@ fun AppNavHost(
                 }
             }
         }
-
-//        composable(route = Routes.UnidadeCurricularProfessor.route) {
-//            Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//                UnidadeCurricularProfessorScreen(
-//                    modifier = Modifier.padding(innerPadding)
-//                )
-//            }
-//        }
     }
 }
