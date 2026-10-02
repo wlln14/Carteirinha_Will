@@ -19,6 +19,9 @@ class LoginViewModel(
 
     fun onEvent(event: LoginEvent) {
         when(event) {
+            LoginEvent.OnLoginScreenEntered -> {
+                _uiState.value = LoginUIState()
+            }
             is LoginEvent.OnUsuarioChange -> {
                 _uiState.update {
                     state -> state.copy(
