@@ -22,6 +22,7 @@ fun UnidadeCurricularCard(
     unidadeCurricular: UnidadeCurricular
 ) {
     Card(
+        modifier = modifier,
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface
@@ -29,8 +30,7 @@ fun UnidadeCurricularCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
     ) {
         Column(
-            modifier = Modifier
-                .padding(16.dp),
+            modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
@@ -39,7 +39,7 @@ fun UnidadeCurricularCard(
             )
 
             Text(
-                text = "Professor: Fulano",
+                text = "Professor: ${unidadeCurricular.professor}",
                 style = MaterialTheme.typography.bodyMedium
             )
 
@@ -47,23 +47,13 @@ fun UnidadeCurricularCard(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-
-                Text(
-                    text = "Nota 1: ${unidadeCurricular.nota1}"
-                )
-
-                Text(
-                    text = "Nota 2: ${unidadeCurricular.nota2}"
-                )
-
-                Text(
-                    text = "Média: ${unidadeCurricular.media}"
-                )
-
+                Text(text = "Nota 1: ${unidadeCurricular.nota1}")
+                Text(text = "Nota 2: ${unidadeCurricular.nota2}")
+                Text(text = "Média: ${unidadeCurricular.media}")
             }
 
             Text(
-                text = "Faltas: 2",
+                text = "Faltas: ${unidadeCurricular.faltas}",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.primary
             )
@@ -74,5 +64,4 @@ fun UnidadeCurricularCard(
 @Preview(showBackground = true)
 @Composable
 fun UnidadeCurricularCardPreview() {
-
 }
