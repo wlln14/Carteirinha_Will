@@ -53,6 +53,10 @@ fun LoginScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val colors = MaterialTheme.colorScheme
 
+    LaunchedEffect(Unit) {
+        viewModel.onEvent(LoginEvent.OnLoginScreenEntered)
+    }
+
     LaunchedEffect(uiState.usuarioLogado) {
         uiState.usuarioLogado?.let { usuario ->
             viewModel.onEvent(LoginEvent.OnNavegacaoRealizada)
