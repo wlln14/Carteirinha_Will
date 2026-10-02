@@ -108,7 +108,7 @@ private fun NotaItem(
             text = valor,
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
-            color = AzulSenai
+            color = colors.primary
         )
     }
 }
