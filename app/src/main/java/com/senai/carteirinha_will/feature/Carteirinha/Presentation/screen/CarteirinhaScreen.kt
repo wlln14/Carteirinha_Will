@@ -28,7 +28,6 @@ import com.senai.carteirinha_will.R
 import com.senai.carteirinha_will.feature.Carteirinha.Presentation.component.QrCode
 
 
-private val CinzaTexto = Color(0xFF626262)
 
 @Composable
 fun CarteirinhaScreen(
@@ -107,7 +106,7 @@ fun CarteirinhaScreen(
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
                                 text = "NOME",
-                                color = CinzaTexto,
+                                color = colors.onSurfaceVariant,
                                 fontSize = 10.sp,
                                 fontWeight = FontWeight.Medium
                             )
@@ -150,7 +149,7 @@ fun CarteirinhaScreen(
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = "90000000001756147983",
-                        color = Color(0xFF252525),
+                        color = colors.onSurface,
                         fontSize = 15.sp,
                         fontWeight = FontWeight.SemiBold,
                         letterSpacing = 0.5.sp,
