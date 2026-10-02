@@ -6,9 +6,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,27 +32,53 @@ private val LaranjaSenai = Color(0xFFFF643C)
 fun HomeScreen(
     navController: NavController,
     usuario: UsuarioLogado,
+    isDarkTheme: Boolean,
+    onToggleDarkTheme: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val backgroundColor = if (isDarkTheme) Color(0xFF12151C) else Color(0xFFF5F6F8)
+    val cardColor = if (isDarkTheme) Color(0xFF202633) else Color.White
+    val primaryTextColor = if (isDarkTheme) Color(0xFFF1F3F8) else Color(0xFF292929)
+    val secondaryTextColor = if (isDarkTheme) Color(0xFFB5BDCC) else Color(0xFF666666)
+    val turmaColor = if (isDarkTheme) Color(0xFF9DB5FF) else AzulSenai
+
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Color(0xFFF5F6F8))
+            .background(backgroundColor)
             .verticalScroll(rememberScrollState())
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(AzulSenai, RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp))
-                .padding(horizontal = 24.dp, vertical = 30.dp)
+                .padding(horizontal = 24.dp, vertical = 22.dp)
         ) {
-            Text(
-                text = "ÁREA DO ALUNO",
-                color = Color.White.copy(alpha = 0.8f),
-                fontSize = 11.sp,
-                fontWeight = FontWeight.SemiBold,
-                letterSpacing = 1.sp
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "ÁREA DO ALUNO",
+                    color = Color.White.copy(alpha = 0.8f),
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    letterSpacing = 1.sp
+                )
+                TextButton(
+                    onClick = onToggleDarkTheme,
+                    colors = ButtonDefaults.textButtonColors(contentColor = Color.White),
+                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp)
+                ) {
+                    Text(
+                        text = if (isDarkTheme) "☀ Modo claro" else "☾ Modo escuro",
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            }
+
             Spacer(modifier = Modifier.height(9.dp))
             Text(
                 text = "Olá, ${usuario.nome.substringBefore(" ").ifBlank { "Aluno" }}!",
@@ -74,7 +102,7 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(24.dp))
             Text(
                 text = "Seus dados",
-                color = Color(0xFF292929),
+                color = primaryTextColor,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold
             )
@@ -83,7 +111,7 @@ fun HomeScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(14.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.White),
+                colors = CardDefaults.cardColors(containerColor = cardColor),
                 elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
             ) {
                 Row(
@@ -102,20 +130,20 @@ fun HomeScreen(
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
                             text = usuario.nome.ifBlank { "Nome não informado" },
-                            color = Color(0xFF252525),
+                            color = primaryTextColor,
                             fontSize = 17.sp,
                             fontWeight = FontWeight.SemiBold
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
                             text = usuario.curso.ifBlank { "Curso não informado" },
-                            color = Color(0xFF666666),
+                            color = secondaryTextColor,
                             fontSize = 13.sp
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
                             text = "Turma: ${usuario.turma.ifBlank { "Não informada" }}",
-                            color = AzulSenai,
+                            color = turmaColor,
                             fontSize = 13.sp,
                             fontWeight = FontWeight.Medium
                         )
@@ -126,7 +154,7 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(26.dp))
             Text(
                 text = "Acesso rápido",
-                color = Color(0xFF292929),
+                color = primaryTextColor,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold
             )
