@@ -34,6 +34,7 @@ fun HomeScreen(
     usuario: UsuarioLogado,
     isDarkTheme: Boolean,
     onToggleDarkTheme: () -> Unit,
+    onLogout: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val colors = MaterialTheme.colorScheme
@@ -67,16 +68,25 @@ fun HomeScreen(
                     fontWeight = FontWeight.SemiBold,
                     letterSpacing = 1.sp
                 )
-                TextButton(
-                    onClick = onToggleDarkTheme,
-                    colors = ButtonDefaults.textButtonColors(contentColor = colors.onPrimary),
-                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp)
-                ) {
-                    Text(
-                        text = if (isDarkTheme) "☀ Modo claro" else "☾ Modo escuro",
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Medium
-                    )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    TextButton(
+                        onClick = onToggleDarkTheme,
+                        colors = ButtonDefaults.textButtonColors(contentColor = colors.onPrimary),
+                        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp)
+                    ) {
+                        Text(
+                            text = if (isDarkTheme) "☀ Claro" else "☾ Escuro",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
+                    TextButton(
+                        onClick = onLogout,
+                        colors = ButtonDefaults.textButtonColors(contentColor = colors.onPrimary),
+                        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp)
+                    ) {
+                        Text("Sair", fontSize = 12.sp, fontWeight = FontWeight.Medium)
+                    }
                 }
             }
 
