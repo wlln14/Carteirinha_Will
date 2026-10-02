@@ -16,21 +16,40 @@ private val googleFontProvider = Provider(
     certificates = R.array.com_google_android_gms_fonts_certs
 )
 
+private val poppinsGoogleFont = GoogleFont("Poppins")
+
 private val Poppins = FontFamily(
-    Font(GoogleFont("Poppins", weight = FontWeight.Normal), googleFontProvider),
-    Font(GoogleFont("Poppins", weight = FontWeight.Medium), googleFontProvider),
-    Font(GoogleFont("Poppins", weight = FontWeight.SemiBold), googleFontProvider),
-    Font(GoogleFont("Poppins", weight = FontWeight.Bold), googleFontProvider)
+    Font(googleFont = poppinsGoogleFont, fontProvider = googleFontProvider, weight = FontWeight.Normal),
+    Font(googleFont = poppinsGoogleFont, fontProvider = googleFontProvider, weight = FontWeight.Medium),
+    Font(googleFont = poppinsGoogleFont, fontProvider = googleFontProvider, weight = FontWeight.SemiBold),
+    Font(googleFont = poppinsGoogleFont, fontProvider = googleFontProvider, weight = FontWeight.Bold)
 )
 
-// Tipografia principal do aplicativo
+private val defaultTypography = Typography()
+
+private fun TextStyle.withPoppins(): TextStyle = copy(fontFamily = Poppins)
+
+// Tipografia principal do aplicativo com Poppins em todos os estilos do Material 3.
 val Typography = Typography(
-    defaultFontFamily = Poppins,
-    bodyLarge = TextStyle(
+    displayLarge = defaultTypography.displayLarge.withPoppins(),
+    displayMedium = defaultTypography.displayMedium.withPoppins(),
+    displaySmall = defaultTypography.displaySmall.withPoppins(),
+    headlineLarge = defaultTypography.headlineLarge.withPoppins(),
+    headlineMedium = defaultTypography.headlineMedium.withPoppins(),
+    headlineSmall = defaultTypography.headlineSmall.withPoppins(),
+    titleLarge = defaultTypography.titleLarge.withPoppins(),
+    titleMedium = defaultTypography.titleMedium.withPoppins(),
+    titleSmall = defaultTypography.titleSmall.withPoppins(),
+    bodyLarge = defaultTypography.bodyLarge.copy(
         fontFamily = Poppins,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
-    )
+    ),
+    bodyMedium = defaultTypography.bodyMedium.withPoppins(),
+    bodySmall = defaultTypography.bodySmall.withPoppins(),
+    labelLarge = defaultTypography.labelLarge.withPoppins(),
+    labelMedium = defaultTypography.labelMedium.withPoppins(),
+    labelSmall = defaultTypography.labelSmall.withPoppins()
 )
