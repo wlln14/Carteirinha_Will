@@ -15,8 +15,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.senai.carteirinha_will.App.di.AppContainer
 import com.senai.carteirinha_will.App.session.SessionViewModel
+import com.senai.carteirinha_will.App.session.SessionViewModelFactory
 import com.senai.carteirinha_will.feature.Carteirinha.Presentation.screen.CarteirinhaScreen
 import com.senai.carteirinha_will.feature.Home_Aluno.presentation.screen.HomeScreen
+import com.senai.carteirinha_will.feature.Login.presentation.factory.LoginViewModelFactory
+import com.senai.carteirinha_will.feature.Login.presentation.LoginViewModel
 import com.senai.carteirinha_will.feature.Login.presentation.screen.LoginScreen
 import com.senai.carteirinha_will.feature.unidadecurriculares.presentation.UnidadeCurricularViewModel
 import com.senai.carteirinha_will.feature.unidadecurriculares.presentation.factory.UnidadeCurricularViewModelFactory
@@ -25,74 +28,98 @@ import com.senai.carteirinha_will.feature.unidadecurriculares.presentation.scree
 @Composable
 fun AppNavHost(
     navController: NavHostController,
-    sessionViewModel: SessionViewModel = viewModel(),
     container: AppContainer,
     isDarkTheme: Boolean,
     onToggleDarkTheme: () -> Unit
 ) {
+    val sessionFactory = remember(container.authTokenStore) {
+        SessionViewModelFactory(container.authTokenStore)
+    }
+    val sessionViewModel: SessionViewModel = viewModel(factory = sessionFactory)
     val usuarioLogado by sessionViewModel.usuarioLogado.collectAsStateWithLifecycle()
-    val usuario = usuarioLogado
 
     NavHost(
         navController = navController,
         startDestination = Routes.Login.route
     ) {
         composable(route = Routes.Login.route) {
+            val loginFactory = remember(container.loginRepository) {
+                LoginViewModelFactory(container.loginRepository)
+            }
+            val loginViewModel: LoginViewModel = viewModel(factory = loginFactory)
+
             LoginScreen(
                 navController = navController,
+                viewModel = loginViewModel,
                 onLoginSucesso = { usuario ->
-                    container.authTokenStore.setToken(usuario.token)
                     sessionViewModel.setUsuarioLogado(usuario)
-                    navController.navigate(Routes.Home_Aluno.route)
+                    navController.navigate(Routes.Home_Aluno.route) {
+                        popUpTo(Routes.Login.route) { inclusive = true }
+                        launchSingleTop = true
+                    }
                 }
             )
         }
 
         composable(route = Routes.Home_Aluno.route) {
-            val usuarioAtual = usuarioLogado
-
-            if (usuarioAtual == null) {
+            val usuario = usuarioLogado
+            if (usuario == null) {
                 LaunchedEffect(Unit) {
-                    navController.navigate(Routes.Login.route)
+                    navController.navigate(Routes.Login.route) {
+                        popUpTo(Routes.Home_Aluno.route) { inclusive = true }
+                        launchSingleTop = true
+                    }
                 }
             } else {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     HomeScreen(
                         modifier = Modifier.padding(innerPadding),
                         navController = navController,
-                        usuario = usuarioAtual,
+                        usuario = usuario,
                         isDarkTheme = isDarkTheme,
-                        onToggleDarkTheme = onToggleDarkTheme
+                        onToggleDarkTheme = onToggleDarkTheme,
+                        onLogout = {
+                            sessionViewModel.limparSession()
+                            navController.navigate(Routes.Login.route) {
+                                popUpTo(Routes.Home_Aluno.route) { inclusive = true }
+                                launchSingleTop = true
+                            }
+                        }
                     )
                 }
             }
         }
 
         composable(route = Routes.Carteirinha.route) {
-            Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                CarteirinhaScreen(
-                    modifier = Modifier.padding(innerPadding)
-                )
+            if (usuarioLogado == null) {
+                LaunchedEffect(Unit) {
+                    navController.navigate(Routes.Login.route) {
+                        popUpTo(Routes.Carteirinha.route) { inclusive = true }
+                        launchSingleTop = true
+                    }
+                }
+            } else {
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    CarteirinhaScreen(modifier = Modifier.padding(innerPadding))
+                }
             }
         }
 
         composable(route = Routes.UnidadeCurricularAluno.route) {
-            if (usuario == null) {
+            if (usuarioLogado == null) {
                 LaunchedEffect(Unit) {
-                    navController.navigate(Routes.Login.route)
+                    navController.navigate(Routes.Login.route) {
+                        popUpTo(Routes.UnidadeCurricularAluno.route) { inclusive = true }
+                        launchSingleTop = true
+                    }
                 }
             } else {
-                val unidadeCurricularFactory = remember(
-                    container.unidadeCurricularRepository
-                ) {
-                    UnidadeCurricularViewModelFactory(
-                        repository = container.unidadeCurricularRepository
-                    )
+                val unidadeCurricularFactory = remember(container.unidadeCurricularRepository) {
+                    UnidadeCurricularViewModelFactory(container.unidadeCurricularRepository)
                 }
+                val unidadeCurricularViewModel: UnidadeCurricularViewModel =
+                    viewModel(factory = unidadeCurricularFactory)
 
-                val unidadeCurricularViewModel: UnidadeCurricularViewModel = viewModel(
-                    factory = unidadeCurricularFactory
-                )
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     UnidadeCurricularScreen(
                         modifier = Modifier.padding(innerPadding),
