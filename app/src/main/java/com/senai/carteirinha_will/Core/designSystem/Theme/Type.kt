@@ -2,33 +2,35 @@ package com.senai.carteirinha_will.Core.designSystem.Theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.googlefonts.GoogleFont
+import androidx.compose.ui.text.googlefonts.GoogleFont.Provider
 import androidx.compose.ui.unit.sp
+import com.senai.carteirinha_will.R
 
-// Set of Material typography styles to start with
+private val googleFontProvider = Provider(
+    providerAuthority = "com.google.android.gms.fonts",
+    providerPackage = "com.google.android.gms",
+    certificates = R.array.com_google_android_gms_fonts_certs
+)
+
+private val Poppins = FontFamily(
+    Font(GoogleFont("Poppins", weight = FontWeight.Normal), googleFontProvider),
+    Font(GoogleFont("Poppins", weight = FontWeight.Medium), googleFontProvider),
+    Font(GoogleFont("Poppins", weight = FontWeight.SemiBold), googleFontProvider),
+    Font(GoogleFont("Poppins", weight = FontWeight.Bold), googleFontProvider)
+)
+
+// Tipografia principal do aplicativo
 val Typography = Typography(
+    defaultFontFamily = Poppins,
     bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
+        fontFamily = Poppins,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
     )
-    /* Other default text styles to override
-    titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
-    ),
-    labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
-    )
-    */
 )
