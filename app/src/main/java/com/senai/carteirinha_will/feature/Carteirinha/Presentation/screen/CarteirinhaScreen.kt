@@ -1,6 +1,5 @@
 package com.senai.carteirinha_will.feature.Carteirinha.Presentation.screen
 
-import android.R.color.white
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -120,7 +119,7 @@ fun CarteirinhaScreen(
                             Spacer(modifier = Modifier.height(12.dp))
                             Text(
                                 text = "CURSO",
-                                color = CinzaTexto,
+                                color = colors.onSurfaceVariant,
                                 fontSize = 10.sp,
                                 fontWeight = FontWeight.Medium
                             )
@@ -140,7 +139,7 @@ fun CarteirinhaScreen(
 
                     Text(
                         text = "MATRÍCULA",
-                        color = CinzaTexto,
+                        color = colors.onSurfaceVariant,
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Medium,
                         modifier = Modifier.fillMaxWidth(),
@@ -174,7 +173,7 @@ fun CarteirinhaScreen(
                     Spacer(modifier = Modifier.height(9.dp))
                     Text(
                         text = "Código para identificação do aluno",
-                        color = CinzaTexto,
+                        color = colors.onSurfaceVariant,
                         fontSize = 11.sp,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth()
@@ -193,7 +192,7 @@ fun CarteirinhaScreen(
         Spacer(modifier = Modifier.height(18.dp))
         Text(
             text = "Apresente esta carteirinha quando solicitado.",
-            color = CinzaTexto,
+            color = colors.onSurfaceVariant,
             fontSize = 12.sp,
             textAlign = TextAlign.Center
         )
