@@ -14,9 +14,11 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.senai.carteirinha_will.feature.unidadecurriculares.Domain.model.UnidadeCurricular
@@ -55,6 +57,7 @@ fun UnidadeCurricularCard(
 
             Text(
                 text = "Professor: ${unidadeCurricular.professor}",
+                fontWeight = FontWeight.SemiBold,
                 style = MaterialTheme.typography.bodyMedium,
                 color = Color(0xFF626B7A)
             )
@@ -64,7 +67,8 @@ fun UnidadeCurricularCard(
                     .fillMaxWidth()
                     .background(Color(0xFFF2F5FC), RoundedCornerShape(12.dp))
                     .padding(vertical = 12.dp, horizontal = 8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 NotaItem(titulo = "Nota 1", valor = unidadeCurricular.nota1.toString(), modifier = Modifier.weight(1f))
                 NotaItem(titulo = "Nota 2", valor = unidadeCurricular.nota2.toString(), modifier = Modifier.weight(1f))
@@ -75,10 +79,12 @@ fun UnidadeCurricularCard(
                 text = "Faltas: ${unidadeCurricular.faltas}",
                 modifier = Modifier
                     .background(Color(0xFFFFF0EB), RoundedCornerShape(8.dp))
-                    .padding(horizontal = 10.dp, vertical = 6.dp),
+                    .padding(horizontal = 10.dp, vertical = 6.dp)
+                    .fillMaxWidth(),
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.SemiBold,
-                color = Color(0xFFD94D2B)
+                color = Color(0xFFD94D2B),
+                textAlign = TextAlign.Center
             )
         }
     }
@@ -90,7 +96,8 @@ private fun NotaItem(
     valor: String,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(3.dp)) {
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(3.dp),
+        horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = titulo,
             fontSize = 12.sp,

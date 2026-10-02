@@ -143,6 +143,7 @@ fun HomeScreen(
                     .align(Alignment.CenterHorizontally)
                     .width(130.dp)
                     .padding(bottom = 22.dp)
+
             )
         }
     }

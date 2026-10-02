@@ -1,5 +1,6 @@
 package com.senai.carteirinha_will.feature.Carteirinha.Presentation.screen
 
+import android.R.color.white
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.senai.carteirinha_will.R
 import com.senai.carteirinha_will.feature.Carteirinha.Presentation.component.QrCode
+
 
 private val AzulSenai = Color(0xFF2145B5)
 private val CinzaTexto = Color(0xFF626262)
@@ -73,12 +75,12 @@ fun CarteirinhaScreen(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(
-                        text = "SENAI",
-                        color = Color.White,
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        letterSpacing = 1.sp
+                    Image(
+                        painter = painterResource(id = R.drawable.logo_senai),
+                        contentDescription = "Logo SENAI",
+                        modifier = Modifier
+                            .width(130.dp)
+                            .background(Color(0xFFFFFFFF), RoundedCornerShape(4.dp))
                     )
                     Text(
                         text = "CARTEIRINHA ESTUDANTIL",
