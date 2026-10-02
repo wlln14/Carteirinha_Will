@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.senai.carteirinha_will.feature.unidadecurriculares.Domain.model.UnidadeCurricular
 
-private val AzulSenai = Color(0xFF2145B5)
 private val LaranjaSenai = Color(0xFFFF643C)
 
 @Composable
@@ -31,10 +30,11 @@ fun UnidadeCurricularCard(
     modifier: Modifier = Modifier,
     unidadeCurricular: UnidadeCurricular
 ) {
+    val colors = MaterialTheme.colorScheme
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(18.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = colors.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
     ) {
         Column(
@@ -45,7 +45,7 @@ fun UnidadeCurricularCard(
                 text = unidadeCurricular.nome,
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
-                color = AzulSenai
+                color = colors.primary
             )
 
             Spacer(
@@ -59,13 +59,13 @@ fun UnidadeCurricularCard(
                 text = "Professor: ${unidadeCurricular.professor}",
                 fontWeight = FontWeight.SemiBold,
                 style = MaterialTheme.typography.bodyMedium,
-                color = Color(0xFF626B7A)
+                color = colors.onSurfaceVariant
             )
 
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color(0xFFF2F5FC), RoundedCornerShape(12.dp))
+                    .background(colors.surfaceVariant, RoundedCornerShape(12.dp))
                     .padding(vertical = 12.dp, horizontal = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
@@ -96,12 +96,13 @@ private fun NotaItem(
     valor: String,
     modifier: Modifier = Modifier
 ) {
+    val colors = MaterialTheme.colorScheme
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(3.dp),
         horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = titulo,
             fontSize = 12.sp,
-            color = Color(0xFF697386)
+            color = colors.onSurfaceVariant
         )
         Text(
             text = valor,
