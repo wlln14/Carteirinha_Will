@@ -39,9 +39,9 @@ fun AppNavHost(
         composable(route = Routes.Login.route) {
             LoginScreen(
                 navController = navController,
-                onLoginSucesso = {
-                    usuario ->
-                        sessionViewModel.setUsuarioLogado(usuario)
+                onLoginSucesso = { usuario ->
+                    container.authTokenStore.setToken(usuario.token)
+                    sessionViewModel.setUsuarioLogado(usuario)
                     navController.navigate(Routes.Home_Aluno.route)
                 }
             )
@@ -117,15 +117,15 @@ fun AppNavHost(
                 ) { innerPadding ->
 
                     UnidadeCurricularScreen(
-                        modifier =Modifier.padding(innerPadding),
-                        viewModel =unidadeCurricularViewModel
+                        modifier = Modifier.padding(innerPadding),
+                        viewModel = unidadeCurricularViewModel
                     )
                 }
             }
         }
 
 //        composable(route = Routes.UnidadeCurricularProfessor.route) {
-//            Scaffold(modifier = Modifier.fillMaxSize()) {innerPadding ->
+//            Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 //                UnidadeCurricularProfessorScreen(
 //                    modifier = Modifier.padding(innerPadding)
 //                )
