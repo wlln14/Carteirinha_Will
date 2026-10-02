@@ -41,7 +41,6 @@ import com.senai.carteirinha_will.feature.Login.domain.model.UsuarioLogado
 import com.senai.carteirinha_will.feature.Login.presentation.LoginEvent
 import com.senai.carteirinha_will.feature.Login.presentation.LoginViewModel
 
-private val AzulSenai = Color(0xFF2145B5)
 private val LaranjaSenai = Color(0xFFFF643C)
 
 @Composable
@@ -52,6 +51,7 @@ fun LoginScreen(
     onLoginSucesso: (UsuarioLogado) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val colors = MaterialTheme.colorScheme
 
     LaunchedEffect(uiState.usuarioLogado) {
         uiState.usuarioLogado?.let { usuario ->
@@ -63,14 +63,14 @@ fun LoginScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color(0xFFF5F6F8))
+            .background(colors.background)
             .padding(horizontal = 22.dp, vertical = 24.dp),
         contentAlignment = Alignment.Center
     ) {
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(18.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
+            colors = CardDefaults.cardColors(containerColor = colors.surface),
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {
             Column(
@@ -90,14 +90,14 @@ fun LoginScreen(
 
                 Text(
                     text = "Acesse sua conta",
-                    color = Color(0xFF252525),
+                    color = colors.onSurface,
                     fontSize = 22.sp,
                     fontWeight = FontWeight.SemiBold
                 )
                 Spacer(modifier = Modifier.height(6.dp))
                 Text(
                     text = "Entre com seus dados de acesso",
-                    color = Color(0xFF6B6B6B),
+                    color = colors.onSurfaceVariant,
                     fontSize = 14.sp,
                     textAlign = TextAlign.Center
                 )
@@ -114,12 +114,12 @@ fun LoginScreen(
                     singleLine = true,
                     shape = RoundedCornerShape(10.dp),
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = AzulSenai,
-                        unfocusedBorderColor = Color(0xFFD5D9E2),
-                        focusedLabelColor = AzulSenai,
-                        cursorColor = AzulSenai,
-                        focusedContainerColor = Color.White,
-                        unfocusedContainerColor = Color.White
+                        focusedBorderColor = colors.primary,
+                        unfocusedBorderColor = colors.outline,
+                        focusedLabelColor = colors.primary,
+                        cursorColor = colors.primary,
+                        focusedContainerColor = colors.surface,
+                        unfocusedContainerColor = colors.surface
                     ),
                     isError = uiState.erroMensage != null
                 )
@@ -167,8 +167,8 @@ fun LoginScreen(
                     enabled = !uiState.isLoading,
                     shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = AzulSenai,
-                        disabledContainerColor = AzulSenai.copy(alpha = 0.7f)
+                        containerColor = colors.primary,
+                        disabledContainerColor = colors.primary.copy(alpha = 0.7f)
                     ),
                     modifier = Modifier
                         .fillMaxWidth()
@@ -177,13 +177,13 @@ fun LoginScreen(
                     if (uiState.isLoading) {
                         CircularProgressIndicator(
                             modifier = Modifier.height(22.dp).width(22.dp),
-                            color = Color.White,
+                            color = colors.onPrimary,
                             strokeWidth = 2.dp
                         )
                     } else {
                         Text(
                             text = "ENTRAR",
-                            color = Color.White,
+                            color = colors.onPrimary,
                             fontWeight = FontWeight.SemiBold,
                             fontSize = 15.sp
                         )
