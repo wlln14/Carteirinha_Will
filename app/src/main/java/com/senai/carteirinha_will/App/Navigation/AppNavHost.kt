@@ -27,6 +27,8 @@ fun AppNavHost(
     navController: NavHostController,
     sessionViewModel: SessionViewModel = viewModel(),
     container: AppContainer,
+    isDarkTheme: Boolean,
+    onToggleDarkTheme: () -> Unit
 ) {
     val usuarioLogado by sessionViewModel.usuarioLogado.collectAsStateWithLifecycle()
     val usuario = usuarioLogado
@@ -58,7 +60,9 @@ fun AppNavHost(
                     HomeScreen(
                         modifier = Modifier.padding(innerPadding),
                         navController = navController,
-                        usuario = usuarioAtual
+                        usuario = usuarioAtual,
+                        isDarkTheme = isDarkTheme,
+                        onToggleDarkTheme = onToggleDarkTheme
                     )
                 }
             }
