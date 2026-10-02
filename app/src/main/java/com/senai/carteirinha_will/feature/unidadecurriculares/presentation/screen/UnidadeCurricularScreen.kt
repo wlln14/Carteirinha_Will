@@ -31,7 +31,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.senai.carteirinha_will.feature.unidadecurriculares.presentation.UnidadeCurricularViewModel
 import com.senai.carteirinha_will.feature.unidadecurriculares.presentation.component.UnidadeCurricularCard
 
-private val AzulSenai = Color(0xFF2145B5)
 private val LaranjaSenai = Color(0xFFFF643C)
 private val FundoTela = Color(0xFFF4F6FC)
 
@@ -42,19 +41,20 @@ fun UnidadeCurricularScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val errorMessage = uiState.errorMessage
+    val colors = MaterialTheme.colorScheme
 
     LaunchedEffect(Unit) { viewModel.carregar() }
 
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(FundoTela)
+            .background(colors.background)
     ) {
         when {
             uiState.isLoading -> {
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center),
-                    color = AzulSenai
+                    color = colors.primary
                 )
             }
 
@@ -64,7 +64,7 @@ fun UnidadeCurricularScreen(
                         .fillMaxWidth()
                         .align(Alignment.Center)
                         .padding(24.dp)
-                        .background(Color.White, RoundedCornerShape(18.dp))
+                        .background(colors.surface, RoundedCornerShape(18.dp))
                         .padding(24.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -77,7 +77,7 @@ fun UnidadeCurricularScreen(
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
                         text = errorMessage,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = colors.onSurfaceVariant
                     )
                 }
             }
@@ -97,7 +97,7 @@ fun UnidadeCurricularScreen(
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
                         text = "Suas disciplinas aparecerão aqui.",
-                        color = Color.Gray,
+                        color = colors.onSurfaceVariant,
                         fontSize = 14.sp
                     )
                 }
@@ -133,7 +133,7 @@ fun UnidadeCurricularScreen(
                             Text(
                                 text = "Acompanhe suas notas e frequência",
                                 fontSize = 14.sp,
-                                color = Color(0xFF697386)
+                                color = colors.onSurfaceVariant
                             )
                         }
                     }
