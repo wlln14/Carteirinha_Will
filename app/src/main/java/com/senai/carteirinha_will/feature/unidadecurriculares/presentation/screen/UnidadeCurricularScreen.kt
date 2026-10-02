@@ -50,44 +50,45 @@ fun UnidadeCurricularScreen(
             Column(
                 modifier = modifier
                     .fillMaxSize()
-                    .padding(horizontal = 16.dp)
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
-
-                Spacer(modifier = Modifier.height(20.dp))
-
                 Text(
-                    text = "Un. Curriculares",
-                    fontSize = 32.sp,
+                    text = "Erro ao carregar unidades curriculares",
+                    fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF2947A3)
+                    color = Color.Red
                 )
 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Text(text = errorMessage)
             }
         }
 
-            uiState.listaUnidadesCurriculares.isEmpty() ->{
-                Box(
-                    modifier =modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ){
-                    Text(text = "Nenhuma unidade curricular encontrada.")
-                }
+        uiState.listaUnidadesCurriculares.isEmpty() -> {
+            Box(
+                modifier = modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(text = "Nenhuma unidade curricular encontrada.")
             }
-            else -> {
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                    contentPadding = PaddingValues(bottom = 16.dp)
-                ) {
+        }
 
-                    items(uiState.listaUnidadesCurriculares) { unidadeCurricular ->
-                        UnidadeCurricularCard(
-                            unidadeCurricular = unidadeCurricular
-                        )
-                    }
+        else -> {
+            LazyColumn(
+                modifier = modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                contentPadding = PaddingValues(bottom = 16.dp)
+            ) {
+                items(uiState.listaUnidadesCurriculares) { unidadeCurricular ->
+                    UnidadeCurricularCard(
+                        unidadeCurricular = unidadeCurricular
+                    )
                 }
             }
         }
     }
+}
