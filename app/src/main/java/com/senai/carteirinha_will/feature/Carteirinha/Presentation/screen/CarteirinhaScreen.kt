@@ -93,29 +93,19 @@ fun CarteirinhaScreen(
                         )
                         Spacer(modifier = Modifier.width(16.dp))
                         Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = "NOME",
-                                color = CinzaTexto,
-                                fontSize = 11.sp,
-                                fontWeight = FontWeight.Medium
-                            )
+                            Text("NOME", color = CinzaTexto, fontSize = 11.sp)
                             Spacer(modifier = Modifier.height(3.dp))
                             Text(
-                                text = "Willian Gama",
+                                "Willian Gama",
                                 color = Color(0xFF222222),
                                 fontSize = 17.sp,
                                 fontWeight = FontWeight.SemiBold
                             )
                             Spacer(modifier = Modifier.height(14.dp))
-                            Text(
-                                text = "CURSO",
-                                color = CinzaTexto,
-                                fontSize = 11.sp,
-                                fontWeight = FontWeight.Medium
-                            )
+                            Text("CURSO", color = CinzaTexto, fontSize = 11.sp)
                             Spacer(modifier = Modifier.height(3.dp))
                             Text(
-                                text = "Desenvolvimento de Sistemas",
+                                "Desenvolvimento de Sistemas",
                                 color = Color(0xFF222222),
                                 fontSize = 13.sp,
                                 lineHeight = 17.sp
@@ -128,16 +118,15 @@ fun CarteirinhaScreen(
                     Spacer(modifier = Modifier.height(14.dp))
 
                     Text(
-                        text = "MATRÍCULA",
+                        "MATRÍCULA",
                         color = CinzaTexto,
                         fontSize = 11.sp,
-                        fontWeight = FontWeight.Medium,
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = "90000000001756147983",
+                        "90000000001756147983",
                         color = Color(0xFF222222),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.SemiBold,
@@ -148,9 +137,7 @@ fun CarteirinhaScreen(
 
                     Spacer(modifier = Modifier.height(18.dp))
                     Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 4.dp),
+                        modifier = Modifier.fillMaxWidth(),
                         contentAlignment = Alignment.Center
                     ) {
                         QrCode(
@@ -160,7 +147,7 @@ fun CarteirinhaScreen(
                     }
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "Código para identificação do aluno",
+                        "Código para identificação do aluno",
                         color = CinzaTexto,
                         fontSize = 11.sp,
                         textAlign = TextAlign.Center,
@@ -172,7 +159,7 @@ fun CarteirinhaScreen(
 
         Spacer(modifier = Modifier.height(18.dp))
         Text(
-            text = "Apresente esta carteirinha quando solicitado.",
+            "Apresente esta carteirinha quando solicitado.",
             color = CinzaTexto,
             fontSize = 12.sp,
             textAlign = TextAlign.Center
