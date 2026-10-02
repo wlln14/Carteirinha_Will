@@ -11,6 +11,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,17 +28,18 @@ import com.senai.carteirinha_will.R
 import com.senai.carteirinha_will.feature.Carteirinha.Presentation.component.QrCode
 
 
-private val AzulSenai = Color(0xFF2145B5)
 private val CinzaTexto = Color(0xFF626262)
 
 @Composable
 fun CarteirinhaScreen(
     modifier: Modifier = Modifier
 ) {
+    val colors = MaterialTheme.colorScheme
+
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Color(0xFFF5F6F8))
+            .background(colors.background)
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -46,7 +48,7 @@ fun CarteirinhaScreen(
 
         Text(
             text = "Carteirinha do aluno",
-            color = AzulSenai,
+            color = colors.primary,
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.fillMaxWidth()
@@ -54,7 +56,7 @@ fun CarteirinhaScreen(
         Spacer(modifier = Modifier.height(5.dp))
         Text(
             text = "Identificação estudantil",
-            color = CinzaTexto,
+            color = colors.onSurfaceVariant,
             fontSize = 13.sp,
             modifier = Modifier.fillMaxWidth()
         )
@@ -63,14 +65,14 @@ fun CarteirinhaScreen(
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
+            colors = CardDefaults.cardColors(containerColor = colors.surface),
             elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
         ) {
             Column(modifier = Modifier.fillMaxWidth()) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(AzulSenai)
+                        .background(colors.primary)
                         .padding(horizontal = 18.dp, vertical = 15.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
@@ -84,7 +86,7 @@ fun CarteirinhaScreen(
                     )
                     Text(
                         text = "CARTEIRINHA ESTUDANTIL",
-                        color = Color.White.copy(alpha = 0.9f),
+                        color = colors.onPrimary.copy(alpha = 0.9f),
                         fontSize = 10.sp,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -99,7 +101,7 @@ fun CarteirinhaScreen(
                             modifier = Modifier
                                 .size(96.dp)
                                 .clip(RoundedCornerShape(8.dp))
-                                .border(1.dp, Color(0xFFE0E0E0), RoundedCornerShape(8.dp))
+                                .border(1.dp, colors.outline, RoundedCornerShape(8.dp))
                         )
                         Spacer(modifier = Modifier.width(16.dp))
                         Column(modifier = Modifier.weight(1f)) {
@@ -112,7 +114,7 @@ fun CarteirinhaScreen(
                             Spacer(modifier = Modifier.height(3.dp))
                             Text(
                                 text = "Willian Gama",
-                                color = Color(0xFF252525),
+                                color = colors.onSurface,
                                 fontSize = 17.sp,
                                 fontWeight = FontWeight.SemiBold
                             )
@@ -126,7 +128,7 @@ fun CarteirinhaScreen(
                             Spacer(modifier = Modifier.height(3.dp))
                             Text(
                                 text = "Desenvolvimento de Sistemas",
-                                color = Color(0xFF333333),
+                                color = colors.onSurface,
                                 fontSize = 13.sp,
                                 lineHeight = 17.sp
                             )
@@ -134,7 +136,7 @@ fun CarteirinhaScreen(
                     }
 
                     Spacer(modifier = Modifier.height(18.dp))
-                    Divider(color = Color(0xFFE8E8E8))
+                    Divider(color = colors.outline.copy(alpha = 0.45f))
                     Spacer(modifier = Modifier.height(14.dp))
 
                     Text(
@@ -161,13 +163,13 @@ fun CarteirinhaScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(12.dp))
-                            .background(Color(0xFFF5F7FC))
+                            .background(colors.surfaceVariant)
                             .padding(vertical = 12.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         QrCode(
                             conteudo = "90000000001756147983",
-                            modifier = Modifier.size(164.dp)
+                            modifier = Modifier.size(164.dp).background(Color.White).padding(4.dp)
                         )
                     }
                     Spacer(modifier = Modifier.height(9.dp))
