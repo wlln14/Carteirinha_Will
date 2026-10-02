@@ -173,15 +173,19 @@ fun HomeScreen(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            Spacer(modifier = Modifier.height(34.dp))
-            Image(
-                painter = painterResource(id = R.drawable.logo_senai),
-                contentDescription = "Logo SENAI",
+            Spacer(modifier = Modifier.height(40.dp))
+            Box(
                 modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .width(130.dp)
-                    .padding(bottom = 22.dp)
-            )
+                    .fillMaxWidth()
+                    .padding(top = 8.dp, bottom = 28.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.logo_senai),
+                    contentDescription = "Logo SENAI",
+                    modifier = Modifier.width(120.dp)
+                )
+            }
         }
     }
 }
