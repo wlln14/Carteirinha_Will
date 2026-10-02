@@ -78,12 +78,12 @@ fun UnidadeCurricularCard(
             Text(
                 text = "Faltas: ${unidadeCurricular.faltas}",
                 modifier = Modifier
-                    .background(Color(0xFFFFF0EB), RoundedCornerShape(8.dp))
+                    .background(if (colors.surface == Color.White) Color(0xFFFFF0EB) else Color(0xFF3A2928), RoundedCornerShape(8.dp))
                     .padding(horizontal = 10.dp, vertical = 6.dp)
                     .fillMaxWidth(),
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.SemiBold,
-                color = Color(0xFFD94D2B),
+                color = if (colors.surface == Color.White) Color(0xFFD94D2B) else Color(0xFFFFA58D),
                 textAlign = TextAlign.Center
             )
         }
