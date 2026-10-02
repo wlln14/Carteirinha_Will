@@ -90,7 +90,7 @@ fun UnidadeCurricularScreen(
                 ) {
                     Text(
                         text = "Nenhuma unidade curricular encontrada.",
-                        color = AzulSenai,
+                        color = colors.primary,
                         fontWeight = FontWeight.SemiBold
                     )
                     Spacer(modifier = Modifier.height(6.dp))
@@ -119,7 +119,7 @@ fun UnidadeCurricularScreen(
                                 text = "Unidades Curriculares",
                                 fontSize = 27.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = AzulSenai
+                                color = colors.primary
                             )
                             Spacer(modifier = Modifier.height(6.dp))
                             Box(
