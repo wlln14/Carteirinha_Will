@@ -26,7 +26,6 @@ import com.senai.carteirinha_will.R
 import com.senai.carteirinha_will.feature.Home_Aluno.component.BotaoNavegacao
 import com.senai.carteirinha_will.feature.Login.domain.model.UsuarioLogado
 
-private val AzulSenai = Color(0xFF2145B5)
 private val LaranjaSenai = Color(0xFFFF643C)
 
 @Composable
@@ -38,11 +37,11 @@ fun HomeScreen(
     modifier: Modifier = Modifier
 ) {
     val colors = MaterialTheme.colorScheme
-    val backgroundColor = if (isDarkTheme) Color(0xFF12151C) else Color(0xFFF5F6F8)
-    val cardColor = if (isDarkTheme) Color(0xFF202633) else Color.White
-    val primaryTextColor = if (isDarkTheme) Color(0xFFF1F3F8) else Color(0xFF292929)
-    val secondaryTextColor = if (isDarkTheme) Color(0xFFB5BDCC) else Color(0xFF666666)
-    val turmaColor = if (isDarkTheme) Color(0xFF9DB5FF) else AzulSenai
+    val backgroundColor = colors.background
+    val cardColor = colors.surface
+    val primaryTextColor = colors.onSurface
+    val secondaryTextColor = colors.onSurfaceVariant
+    val turmaColor = colors.primary
 
     Column(
         modifier = modifier
@@ -63,14 +62,14 @@ fun HomeScreen(
             ) {
                 Text(
                     text = "ÁREA DO ALUNO",
-                    color = Color.White.copy(alpha = 0.8f),
+                    color = colors.onPrimary.copy(alpha = 0.85f),
                     fontSize = 11.sp,
                     fontWeight = FontWeight.SemiBold,
                     letterSpacing = 1.sp
                 )
                 TextButton(
                     onClick = onToggleDarkTheme,
-                    colors = ButtonDefaults.textButtonColors(contentColor = Color.White),
+                    colors = ButtonDefaults.textButtonColors(contentColor = colors.onPrimary),
                     contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp)
                 ) {
                     Text(
@@ -84,14 +83,14 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(9.dp))
             Text(
                 text = "Olá, ${usuario.nome.substringBefore(" ").ifBlank { "Aluno" }}!",
-                color = Color.White,
+                color = colors.onPrimary,
                 fontSize = 26.sp,
                 fontWeight = FontWeight.Bold
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = "Bem-vindo à sua área do aluno.",
-                color = Color.White.copy(alpha = 0.9f),
+                color = colors.onPrimary.copy(alpha = 0.9f),
                 fontSize = 14.sp
             )
         }
