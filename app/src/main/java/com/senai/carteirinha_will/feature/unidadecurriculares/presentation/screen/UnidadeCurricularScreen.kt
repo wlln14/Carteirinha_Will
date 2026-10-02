@@ -32,7 +32,6 @@ import com.senai.carteirinha_will.feature.unidadecurriculares.presentation.Unida
 import com.senai.carteirinha_will.feature.unidadecurriculares.presentation.component.UnidadeCurricularCard
 
 private val LaranjaSenai = Color(0xFFFF643C)
-private val FundoTela = Color(0xFFF4F6FC)
 
 @Composable
 fun UnidadeCurricularScreen(
@@ -72,7 +71,7 @@ fun UnidadeCurricularScreen(
                         text = "Não foi possível carregar as unidades",
                         fontSize = 19.sp,
                         fontWeight = FontWeight.Bold,
-                        color = AzulSenai
+                        color = colors.primary
                     )
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
