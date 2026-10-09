@@ -75,7 +75,7 @@ fun HomeScreen(
                     contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp)
                 ) {
                     Text(
-                        text = if (isDarkTheme) "☀ Modo claro" else "☾ Modo escuro",
+                        text = if (isDarkTheme) "☀" else "☾",
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Medium
                     )
