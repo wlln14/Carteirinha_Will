@@ -160,7 +160,7 @@ fun LoginScreen(
                 uiState.erroMensage?.let {
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
-                        text = "Usuário ou senha inválidos",
+                        text = it,
                         textAlign = TextAlign.Center,
                         color = MaterialTheme.colorScheme.error,
                         modifier = Modifier.fillMaxWidth(),
