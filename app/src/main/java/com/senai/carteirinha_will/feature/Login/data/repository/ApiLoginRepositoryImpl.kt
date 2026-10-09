@@ -31,7 +31,7 @@ class ApiLoginRepositoryImpl(
         return when (throwable) {
             is HttpException -> mapHttpException(throwable)
             is IOException -> IllegalStateException(
-                "API não conectadadas."
+                "API não conectadas."
             )
             else -> IllegalStateException(throwable.message ?: "Erro inesperado ao fazer login.")
         }
