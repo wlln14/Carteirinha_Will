@@ -57,6 +57,9 @@ fun NavGraphBuilder.alunoNavGraph(
                 ) { innerPadding ->
                     HomeAlunoScreen(
                         usuarioLogado = usuario,
+                        isDarkTheme = darkTheme,
+                        onToggleDarkTheme = { onDarkThemeChange(!darkTheme) },
+                        onLogout = onLogout,
                         onCarteirinhaClick = {
                             navController.navigate(AlunoRoutes.CARTEIRINHA)
                         },
