@@ -15,7 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.senai.carteirinha_will.core.designsystem.component.NavigationButton
-import com.senai.carteirinha_will.Core.designSystem.Theme.Carteirinha_WillTheme
+import com.senai.carteirinha_will.core.designsystem.theme.Carteirinha_WillTheme
 import com.senai.carteirinha_will.feature.login.domain.model.PerfilAcesso
 import com.senai.carteirinha_will.feature.login.domain.model.UsuarioLogado
 
