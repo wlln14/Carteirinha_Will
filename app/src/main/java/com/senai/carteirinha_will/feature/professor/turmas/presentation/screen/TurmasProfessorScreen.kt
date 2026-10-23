@@ -53,7 +53,7 @@ fun TurmasProfessorScreen(
                 Column {
                     Box(
                         modifier = Modifier
-                            .widthCompat(38.dp)
+                            .width(38.dp)
                             .height(4.dp)
                             .background(LaranjaSenai, RoundedCornerShape(4.dp))
                     )
