@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.senai.carteirinha_will.core.designsystem.component.NavigationButton
 import com.senai.carteirinha_will.core.designsystem.theme.Carteirinha_WillTheme
+import com.senai.carteirinha_will.feature.aluno.home.presentation.component.BotaoNavegacao
 import com.senai.carteirinha_will.feature.login.domain.model.PerfilAcesso
 import com.senai.carteirinha_will.feature.login.domain.model.UsuarioLogado
 
@@ -144,13 +145,15 @@ fun HomeProfessorScreen(
             )
             Spacer(modifier = Modifier.height(14.dp))
 
-            NavigationButton(
+            BotaoNavegacao(
                 text = "Minhas turmas",
                 onClick = onTurmasClick,
                 modifier = Modifier.fillMaxWidth()
             )
+
             Spacer(modifier = Modifier.height(12.dp))
-            NavigationButton(
+
+            BotaoNavegacao(
                 text = "Unidades curriculares",
                 onClick = onUnidadesCurricularesClick,
                 modifier = Modifier.fillMaxWidth()

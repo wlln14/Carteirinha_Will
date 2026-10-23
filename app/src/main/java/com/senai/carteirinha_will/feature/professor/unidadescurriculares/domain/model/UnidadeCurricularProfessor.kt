@@ -1,4 +1,4 @@
-package com.senai.carteirinha_will.feature.professor.model
+package com.senai.carteirinha_will.feature.professor.unidadescurriculares.domain.model
 
 data class UnidadeCurricularProfessor(
     val nome: String,

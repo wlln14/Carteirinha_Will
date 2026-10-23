@@ -24,7 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.senai.carteirinha_will.feature.professor.model.UnidadeCurricularProfessor
+import com.senai.carteirinha_will.feature.professor.unidadescurriculares.domain.model.UnidadeCurricularProfessor
 
 private val LaranjaSenai = Color(0xFFFF643C)
 
