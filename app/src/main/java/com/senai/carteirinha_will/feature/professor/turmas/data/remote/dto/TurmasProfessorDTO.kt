@@ -1,17 +1,15 @@
 package com.senai.carteirinha_will.feature.professor.turmas.data.remote.dto
 
-import com.senai.carteirinha_will.feature.aluno.unidadescurriculares.domain.model.UnidadeCurricular
 import com.senai.carteirinha_will.feature.professor.turmas.domain.model.TurmasProfessor
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class TurmasProfessorDTO(
     val id: String,
-    val nome: String,
+    val codigo: String,
     val curso: String,
-    val quantidadeAlunos: Int,
-    val horario: String,
     val semestre: String,
+    val quantidadeAlunos: Int,
     val diasSemana: List<String>,
     val horarioInicio: String,
     val horarioFim: String
@@ -19,10 +17,10 @@ data class TurmasProfessorDTO(
     fun toDomain(): TurmasProfessor {
         return TurmasProfessor(
             id = id,
-            nome = nome,
+            nome = codigo,
             curso = curso,
             quantidadeAlunos = quantidadeAlunos,
-            horario = horario,
+            horario = "$horarioInicio - $horarioFim",
             semestre = semestre,
             diasSemana = diasSemana,
             horarioInicio = horarioInicio,
