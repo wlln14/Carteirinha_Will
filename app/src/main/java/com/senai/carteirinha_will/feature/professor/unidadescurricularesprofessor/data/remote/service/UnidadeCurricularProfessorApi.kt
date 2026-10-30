@@ -5,6 +5,6 @@ import retrofit2.http.GET
 
 interface UnidadeCurricularProfessorApi {
 
-    @GET("unidades-curriculares")
+    @GET("professores/me/unidades-curriculares")
     suspend fun listar(): List<UnidadeCurricularProfessorDto>
 }
