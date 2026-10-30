@@ -7,7 +7,7 @@ data class TurmasProfessor(
     val quantidadeAlunos: Int,
     val horario: String,
     val semestre: String,
-    val diasSemana: String,
+    val diasSemana: List<String>,
     val horarioInicio: String,
     val horarioFim: String
 )

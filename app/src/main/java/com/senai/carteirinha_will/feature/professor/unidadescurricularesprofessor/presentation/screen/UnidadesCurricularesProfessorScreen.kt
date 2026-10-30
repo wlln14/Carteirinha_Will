@@ -1,4 +1,4 @@
-package com.senai.carteirinha_will.feature.professor.unidadescurriculares.presentation.screen
+package com.senai.carteirinha_will.feature.professor.unidadescurricularesprofessor.presentation.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -24,7 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.senai.carteirinha_will.feature.professor.unidadescurriculares.domain.model.UnidadeCurricularProfessor
+import com.senai.carteirinha_will.feature.professor.unidadescurricularesprofessor.domain.model.UnidadeCurricularProfessor
 
 private val LaranjaSenai = Color(0xFFFF643C)
 

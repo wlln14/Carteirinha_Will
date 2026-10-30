@@ -14,7 +14,7 @@ import com.senai.carteirinha_will.feature.login.domain.model.PerfilAcesso
 import com.senai.carteirinha_will.feature.login.domain.model.UsuarioLogado
 import com.senai.carteirinha_will.feature.professor.home.presentation.screen.HomeProfessorScreen
 import com.senai.carteirinha_will.feature.professor.turmas.presentation.screen.TurmasProfessorScreen
-import com.senai.carteirinha_will.feature.professor.unidadescurriculares.presentation.screen.UnidadesCurricularesProfessorScreen
+import com.senai.carteirinha_will.feature.professor.unidadescurricularesprofessor.presentation.screen.UnidadesCurricularesProfessorScreen
 import kotlinx.coroutines.flow.StateFlow
 
 fun NavGraphBuilder.professorNavGraph(
