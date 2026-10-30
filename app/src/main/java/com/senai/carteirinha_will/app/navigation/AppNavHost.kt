@@ -20,52 +20,30 @@ fun AppNavHost(
     onDarkThemeChange: (Boolean) -> Unit,
     container: AppContainer
 ) {
-
     val sessionFactory = remember(container.sessionTokenStore) {
-        SessionViewModelFactory(
-            sessionTokenStore = container.sessionTokenStore
-        )
+        SessionViewModelFactory(sessionTokenStore = container.sessionTokenStore)
     }
+    val sessionViewModel: SessionViewModel = viewModel(factory = sessionFactory)
 
-    val sessionViewModel: SessionViewModel = viewModel(
-        factory = sessionFactory
-    )
-
-    fun graphFor(perfil: PerfilAcesso): String {
-        return when (perfil) {
-            PerfilAcesso.ALUNO -> GraphRoutes.ALUNO
-            PerfilAcesso.PROFESSOR -> GraphRoutes.PROFESSOR
-        }
+    fun graphFor(perfil: PerfilAcesso) = when (perfil) {
+        PerfilAcesso.ALUNO -> GraphRoutes.ALUNO
+        PerfilAcesso.PROFESSOR -> GraphRoutes.PROFESSOR
     }
-
-    fun replaceGraph(
-        currentGraph: String,
-        destinationGraph: String
-    ) {
-
+    fun replaceGraph(currentGraph: String, destinationGraph: String) {
         navController.navigate(destinationGraph) {
-            popUpTo(currentGraph) {
-                inclusive = true
-            }
+            popUpTo(currentGraph) { inclusive = true }
             launchSingleTop = true
         }
     }
 
-    NavHost(
-        navController = navController,
-        startDestination = GraphRoutes.AUTH
-    ) {
+    NavHost(navController = navController, startDestination = GraphRoutes.AUTH) {
         authNavGraph(
             loginRepository = container.loginRepository,
             onLoginSucesso = { usuario ->
                 sessionViewModel.setUsuarioLogado(usuario)
-                replaceGraph(
-                    currentGraph = GraphRoutes.AUTH,
-                    destinationGraph = graphFor(usuario.perfil)
-                )
+                replaceGraph(GraphRoutes.AUTH, graphFor(usuario.perfil))
             }
         )
-
         alunoNavGraph(
             navController = navController,
             usuarioLogadoFlow = sessionViewModel.usuarioLogado,
@@ -74,49 +52,24 @@ fun AppNavHost(
             onDarkThemeChange = onDarkThemeChange,
             onLogout = {
                 sessionViewModel.limparSessao()
-                replaceGraph(
-                    currentGraph = GraphRoutes.ALUNO,
-                    destinationGraph = GraphRoutes.AUTH
-                )
+                replaceGraph(GraphRoutes.ALUNO, GraphRoutes.AUTH)
             },
-            onSessaoAusente = {
-                replaceGraph(
-                    currentGraph = GraphRoutes.ALUNO,
-                    destinationGraph = GraphRoutes.AUTH
-                )
-            },
-            onPerfilInvalido = { perfil ->
-                replaceGraph(
-                    currentGraph = GraphRoutes.ALUNO,
-                    destinationGraph = graphFor(perfil)
-                )
-            }
+            onSessaoAusente = { replaceGraph(GraphRoutes.ALUNO, GraphRoutes.AUTH) },
+            onPerfilInvalido = { perfil -> replaceGraph(GraphRoutes.ALUNO, graphFor(perfil)) }
         )
-
         professorNavGraph(
             navController = navController,
             usuarioLogadoFlow = sessionViewModel.usuarioLogado,
+            turmasProfessorRepository = container.turmasProfessorRepository,
+            unidadeCurricularProfessorRepository = container.unidadeCurricularProfessorRepository,
             darkTheme = darkTheme,
             onDarkThemeChange = onDarkThemeChange,
             onLogout = {
                 sessionViewModel.limparSessao()
-                replaceGraph(
-                    currentGraph = GraphRoutes.PROFESSOR,
-                    destinationGraph = GraphRoutes.AUTH
-                )
+                replaceGraph(GraphRoutes.PROFESSOR, GraphRoutes.AUTH)
             },
-            onSessaoAusente = {
-                replaceGraph(
-                    currentGraph = GraphRoutes.PROFESSOR,
-                    destinationGraph = GraphRoutes.AUTH
-                )
-            },
-            onPerfilInvalido = { perfil ->
-                replaceGraph(
-                    currentGraph = GraphRoutes.PROFESSOR,
-                    destinationGraph = graphFor(perfil)
-                )
-            }
+            onSessaoAusente = { replaceGraph(GraphRoutes.PROFESSOR, GraphRoutes.AUTH) },
+            onPerfilInvalido = { perfil -> replaceGraph(GraphRoutes.PROFESSOR, graphFor(perfil)) }
         )
     }
 }
