@@ -5,6 +5,6 @@ import retrofit2.http.GET
 
 interface TurmasProfessorApi {
 
-    @GET("turmas")
+    @GET("professores/me/turmas")
     suspend fun listar(): List<TurmasProfessorDTO>
 }
