@@ -1,14 +1,13 @@
 package com.senai.carteirinha_will.feature.professor.unidadescurricularesprofessor.data.remote.dto
 
-import com.senai.carteirinha_will.feature.aluno.unidadescurriculares.domain.model.UnidadeCurricular
 import com.senai.carteirinha_will.feature.professor.unidadescurricularesprofessor.domain.model.UnidadeCurricularProfessor
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class UnidadeCurricularProfessorDto(
-    val id: Int,
+    val id: String,
     val nome: String,
-    val turmaId: Int,
+    val turmaId: String,
     val turma: String,
     val cargaHoraria: Int,
     val quantidadeAulas: Int,
