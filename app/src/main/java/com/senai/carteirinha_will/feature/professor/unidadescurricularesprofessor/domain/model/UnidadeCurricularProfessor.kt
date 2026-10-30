@@ -1,9 +1,9 @@
 package com.senai.carteirinha_will.feature.professor.unidadescurricularesprofessor.domain.model
 
 data class UnidadeCurricularProfessor(
-    val id: Int,
+    val id: String,
     val nome: String,
-    val turmaId: Int,
+    val turmaId: String,
     val turma: String,
     val cargaHoraria: Int,
     val quantidadeAulas: Int,
