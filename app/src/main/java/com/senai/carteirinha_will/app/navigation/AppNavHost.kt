@@ -1,4 +1,4 @@
-package com.senai.carteirinha_will.app.navigation
+ package com.senai.carteirinha_will.app.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -6,6 +6,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.senai.carteirinha_will.app.di.AppContainer
+import com.senai.carteirinha_will.app.navigation.admin.adminNavGraph
 import com.senai.carteirinha_will.app.navigation.aluno.alunoNavGraph
 import com.senai.carteirinha_will.app.navigation.auth.authNavGraph
 import com.senai.carteirinha_will.app.navigation.professor.professorNavGraph
@@ -25,16 +26,27 @@ fun AppNavHost(
     }
     val sessionViewModel: SessionViewModel = viewModel(factory = sessionFactory)
 
-    fun graphFor(perfil: PerfilAcesso) = when (perfil) {
-        PerfilAcesso.ALUNO -> GraphRoutes.ALUNO
-        PerfilAcesso.PROFESSOR -> GraphRoutes.PROFESSOR
+    fun graphFor(perfil: PerfilAcesso): String {
+        return when (perfil) {
+            PerfilAcesso.ALUNO -> GraphRoutes.ALUNO
+            PerfilAcesso.PROFESSOR -> GraphRoutes.PROFESSOR
+            PerfilAcesso.ADMIN -> GraphRoutes.ADMIN
+        }
     }
-    fun replaceGraph(currentGraph: String, destinationGraph: String) {
+
+    fun replaceGraph(
+        currentGraph: String,
+        destinationGraph: String
+    ) {
+
         navController.navigate(destinationGraph) {
-            popUpTo(currentGraph) { inclusive = true }
+            popUpTo(currentGraph) {
+                inclusive = true
+            }
             launchSingleTop = true
         }
     }
+
 
     NavHost(navController = navController, startDestination = GraphRoutes.AUTH) {
         authNavGraph(
@@ -70,6 +82,23 @@ fun AppNavHost(
             },
             onSessaoAusente = { replaceGraph(GraphRoutes.PROFESSOR, GraphRoutes.AUTH) },
             onPerfilInvalido = { perfil -> replaceGraph(GraphRoutes.PROFESSOR, graphFor(perfil)) }
+        )
+        adminNavGraph(
+            navController = navController,
+            usuarioLogadoFlow = sessionViewModel.usuarioLogado,
+            gestaoSolicitacoesRepository = container.gestaoSolicitacoesRepository,
+            darkTheme = darkTheme,
+            onDarkThemeChange = onDarkThemeChange,
+            onLogout = {
+                sessionViewModel.limparSessao()
+                replaceGraph(GraphRoutes.ADMIN, GraphRoutes.AUTH)
+            },
+            onSessaoAusente = {
+                replaceGraph(GraphRoutes.ADMIN, GraphRoutes.AUTH)
+            },
+            onPerfilInvalido = { perfil ->
+                replaceGraph(GraphRoutes.ADMIN, graphFor(perfil))
+            }
         )
     }
 }

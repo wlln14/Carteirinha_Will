@@ -2,9 +2,15 @@ package com.senai.carteirinha_will.app.di
 
 import com.senai.carteirinha_will.core.auth.SessionTokenStore
 import com.senai.carteirinha_will.core.network.NetworkClient
+import com.senai.carteirinha_will.feature.admin.data.remote.service.GestaoSolicitacoesApi
+import com.senai.carteirinha_will.feature.admin.data.repository.ApiGestaoSolicitacoesRepositoryImpl
+import com.senai.carteirinha_will.feature.admin.domain.repository.GestaoSolicitacoesRepository
 import com.senai.carteirinha_will.feature.aluno.unidadescurriculares.data.remote.service.UnidadeCurricularApi
 import com.senai.carteirinha_will.feature.aluno.unidadescurriculares.data.repository.ApiUnidadeCurricularRepositoryImpl
 import com.senai.carteirinha_will.feature.aluno.unidadescurriculares.domain.repository.UnidadeCurricularRepository
+import com.senai.carteirinha_will.feature.cadastro.data.remote.service.CadastroPublicoApi
+import com.senai.carteirinha_will.feature.cadastro.data.repository.ApiCadastroRepositoryImpl
+import com.senai.carteirinha_will.feature.cadastro.domain.repository.CadastroRepository
 import com.senai.carteirinha_will.feature.login.data.remote.service.AuthApi
 import com.senai.carteirinha_will.feature.login.data.repository.ApiLoginRepositoryImpl
 import com.senai.carteirinha_will.feature.login.data.repository.FakeAuthRepository
@@ -18,26 +24,59 @@ import com.senai.carteirinha_will.feature.professor.unidadescurricularesprofesso
 
 class DefaultAppContainer : AppContainer {
     override val sessionTokenStore: SessionTokenStore = SessionTokenStore()
-    private val networkClient = NetworkClient(BASE_URL, sessionTokenStore)
+    private val networkClient = NetworkClient(
+        baseUrl = BASE_URL,
+        sessionTokenStore = sessionTokenStore
+    )
 
-    private val authApi: AuthApi by lazy { networkClient.createPublic(AuthApi::class.java) }
-    private val unidadeCurricularApi: UnidadeCurricularApi by lazy { networkClient.createAuthenticated(UnidadeCurricularApi::class.java) }
-    private val turmasProfessorApi: TurmasProfessorApi by lazy { networkClient.createAuthenticated(TurmasProfessorApi::class.java) }
-    private val unidadeCurricularProfessorApi: UnidadeCurricularProfessorApi by lazy { networkClient.createAuthenticated(UnidadeCurricularProfessorApi::class.java) }
+    private val authApi: AuthApi by lazy {
+        networkClient.createPublic(AuthApi::class.java)
+    }
+
+    private val unidadeCurricularProfessorApi: UnidadeCurricularProfessorApi by lazy {
+        networkClient.createAuthenticated(UnidadeCurricularProfessorApi::class.java)
+    }
+
+    private val turmasProfessorApi: TurmasProfessorApi by lazy {
+        networkClient.createAuthenticated(TurmasProfessorApi::class.java)
+    }
+
+    private val unidadeCurricularApi: UnidadeCurricularApi by lazy {
+        networkClient.createAuthenticated(UnidadeCurricularApi::class.java)
+    }
+
+    override val cadastroRepository: CadastroRepository by lazy {
+        ApiCadastroRepositoryImpl(
+            api = networkClient.createPublic(CadastroPublicoApi::class.java)
+        )
+    }
+
+    override val gestaoSolicitacoesRepository: GestaoSolicitacoesRepository by lazy {
+        ApiGestaoSolicitacoesRepositoryImpl(
+            api = networkClient.createAuthenticated(GestaoSolicitacoesApi::class.java)
+        )
+    }
 
     override val loginRepository: LoginRepository by lazy {
-        if (USE_FAKE_LOGIN_REPOSITORY) FakeAuthRepository()
-        else ApiLoginRepositoryImpl(api = authApi)
+        if (USE_FAKE_LOGIN_REPOSITORY) {
+            FakeAuthRepository()
+        } else {
+            ApiLoginRepositoryImpl(api = authApi)
+        }
     }
     override val unidadeCurricularRepository: UnidadeCurricularRepository by lazy {
         ApiUnidadeCurricularRepositoryImpl(api = unidadeCurricularApi)
     }
-    override val turmasProfessorRepository: TurmasProfessorRepository by lazy {
-        ApiTurmasProfessorRepositoryImpl(api = turmasProfessorApi)
-    }
+
     override val unidadeCurricularProfessorRepository: UnidadeCurricularProfessorRepository by lazy {
         ApiUnidadeCurricularProfessorRepositoryImpl(api = unidadeCurricularProfessorApi)
     }
+
+    override val turmasProfessorRepository: TurmasProfessorRepository by lazy {
+        ApiTurmasProfessorRepositoryImpl(api = turmasProfessorApi)
+    }
+
+
 
     companion object {
         private const val BASE_URL = "http://10.0.2.2:8080/"
